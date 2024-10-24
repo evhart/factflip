@@ -5,6 +5,8 @@
 
 ### Bug Fixes
 
+* fix: add embeddings data. ([`c3d323f`](https://github.com/evhart/factflip/commit/c3d323f381dae3d2e7ed65b5f20773e8203f4b69))
+
 * fix: add workflow support for main branch. ([`cf86bad`](https://github.com/evhart/factflip/commit/cf86badcd8034af518a56554c8475be455b72fe6))
 
 ### Features
@@ -12,6 +14,8 @@
 * feat:  first code release of the factflip. ([`ee6c7a4`](https://github.com/evhart/factflip/commit/ee6c7a411749b5f960af6134d98731f78b5a888c))
 
 ### Unknown
+
+* Merge branch 'main' of https://github.com/evhart/factflip ([`1521a5b`](https://github.com/evhart/factflip/commit/1521a5b15ead9edd74996416b3997edfd46c5f75))
 
 * Typos fix. ([`38d208d`](https://github.com/evhart/factflip/commit/38d208db33c5d42628dc79682762672b7b20aa64))
 
