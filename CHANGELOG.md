@@ -1,6 +1,13 @@
 # CHANGELOG
 
 
+## v0.1.2 (2024-10-24)
+
+### Bug Fixes
+
+* fix: Add pull source to embedding data update workflow. ([`98d4ac6`](https://github.com/evhart/factflip/commit/98d4ac6b833bc86935ec02bcb6c76be7f8b6b95e))
+
+
 ## v0.1.1 (2024-10-24)
 
 ### Unknown
