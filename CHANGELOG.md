@@ -1,6 +1,13 @@
 # CHANGELOG
 
 
+## v0.1.4 (2024-10-24)
+
+### Bug Fixes
+
+* fix: refactor workflows. ([`8b517bc`](https://github.com/evhart/factflip/commit/8b517bc281587c675b410e48f3ac408c194925ce))
+
+
 ## v0.1.3 (2024-10-24)
 
 ### Bug Fixes
