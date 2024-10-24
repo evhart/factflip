@@ -1,0 +1,30 @@
+name: Release and Pip Package Action
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions: write-all
+    steps:
+      - name: Create Semantic Release
+        uses: matteo4diani/poetry-semantic-release@v0
+        id: create-release
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          pypi-token: ${{ secrets.PYPI_TOKEN }}
+          python-version: 3.12
+      - name: Add Embeddings to Release
+        uses: JasonEtco/upload-to-release@master
+        id: add-embeddings
+        with:
+          args: data/factflip_embeddings.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    outputs:
+      released: ${{ steps.create-release.outputs.released }}
+      embeddings_url: ${{ steps.add-embeddings.outputs.browser_download_url }}

@@ -1,19 +1,58 @@
 # 🖼️ FactFlip
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 > FactFlip is an image macro meme generator designed for creating fact-checking memes based on misinforming claims and their corrections.
 
+## ℹ️ Installation and Usage
+
+Factflip can be installed using pip:
+
+```
+pip install factflip
+```
+
+### 📒 Requirements
+
+Counsel requires an [Ollama](https://ollama.com/) installation for running the LLMs used for generating the memes. An [Imgflip](https://imgflip.com/api) username and password is required for generating the meme image.
+
+### 🖥️ Command Line Interface (CLI)
+
+Factflip has a simple CLI interface that be accessed using the ```factflip``` command.
+
+```
+ Usage: factflip [OPTIONS] COMMAND [ARGS]...
+
+ 🖼️  Factflip - A claim-based meme generator powered by IMKG and LLMs.
+
+╭─ Options ─────────────────────────────────────────────────────────────────────────╮
+│ --help          Show this message and exit.                                       │
+╰───────────────────────────────────────────────────────────────────────────────────╯
+╭─ Commands ────────────────────────────────────────────────────────────────────────╮
+│ build      Build the meme embedding database.                                     │
+│ generate   Generate the text of a meme.                                           │
+│ render     Render a meme instance using the imgflip API.                          │
+╰───────────────────────────────────────────────────────────────────────────────────╯
+```
+
+## 🎓 Publication
+
+> Filipe Altoe, Gregoire Burel, Sergio Miguel Gonçalves Pinto, Harith Alani and H. Sofia Pinto. *"Towards AI-mediated Meme Generation for Misinformation Corrective Explanation"*. EMAI-XAI24, CAI 2024. IOS Press, 2024.
 
 ## 📐 Architecture
-FactFlip, like [MemeCraft](https://arxiv.org/abs/2403.14652), uses a large language model to understand and generate memes. However, FactFlip focuses on creating specific memes to debunk misinformation, using humour and well-matched meme formats to make the corrections clear and engaging. 
+
+FactFlip, like [MemeCraft](https://arxiv.org/abs/2403.14652), uses a large language model to understand and generate memes. However, FactFlip focuses on creating specific memes to debunk misinformation, using humour and well-matched meme formats to make the corrections clear and engaging.
 
 ![FactFlip Architecture](.//images/factflip_architecture.png)
 
-## 🤖 Prompts 
+## 🤖 Prompts
+
 The following prompts are currently used by FactFlip.
 
 ### Meme Concept Extraction (Step A)
+
 The following prompt is used for extracting the main concept based on the meme template usage description.
+
 ```json
 [
    {
@@ -32,7 +71,9 @@ The following prompt is used for extracting the main concept based on the meme t
 ```
 
 ### Meme Image Captioning (Step B)
+
 The image description is extracted using the following prompt.
+
 ```json
 [
    {
@@ -48,7 +89,9 @@ The image description is extracted using the following prompt.
 ```
 
 ### Meme Claims Generation(Step C)
+
 The claim behind a given meme content is extracted with this prompt.
+
 ```json
 [
    {
@@ -75,6 +118,7 @@ The claim behind a given meme content is extracted with this prompt.
 ```
 
 The misinforming claim is extracted as follows.
+
 ```json
 [
    {
@@ -97,6 +141,7 @@ The misinforming claim is extracted as follows.
 ```
 
 ### Meme Caption Generation (Step 3)
+
 The following prompt is used for generating the meme caption. The actual prompt uses 4 examples.
 
 ```json
@@ -145,6 +190,7 @@ The following prompt is used for generating the meme caption. The actual prompt 
 ```
 
 The resulting meme caption is split using the following prompt:
+
 ```json
 "Just answer: Split the sentence in two: <MEME_CAPTION>"
 ```
