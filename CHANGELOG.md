@@ -1,6 +1,13 @@
 # CHANGELOG
 
 
+## v0.1.6 (2024-10-24)
+
+### Bug Fixes
+
+* fix: update workflow. ([`4a73b3e`](https://github.com/evhart/factflip/commit/4a73b3e3196d449d0e44d565739f95b16984269e))
+
+
 ## v0.1.5 (2024-10-24)
 
 ### Bug Fixes
