@@ -23,7 +23,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           cd ${{github.workspace}}
-          gh release upload ${{steps.create-release.outputs.tag}} data/factflip_embeddings.zip#factflip_embeddings-${{steps.create-release.outputs.tag}}.zip
+          gh release upload "${{steps.create-release.outputs.tag}}" data/factflip_embeddings.zip#factflip_embeddings-${{steps.create-release.outputs.version}}.zip
         shell: bash
     outputs:
       released: ${{ steps.create-release.outputs.released }}
+      tag: ${{ steps.create-release.outputs.tag }}
+      version: ${{ steps.create-release.outputs.version }}
