@@ -26,11 +26,11 @@ jobs:
     needs: release
     steps:
       - name: Pull source
-        uses: actions/checkout@v1
+        uses: actions/checkout@v4
       - name: Add Embeddings to Release
-        uses: JasonEtco/upload-to-release@master
-        id: add-embeddings
-        with:
-          args: data/factflip_embeddings.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+            cd ${{github.workspace}}
+            gh release upload ${{github.event.release.tag_name}} data/factflip_embeddings.zip#factflip_embeddings-${{github.event.release.tag_name}}.zip
+        shell: bash
