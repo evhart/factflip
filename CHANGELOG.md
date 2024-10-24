@@ -1,9 +1,18 @@
 # CHANGELOG
 
 
+## v0.1.1 (2024-10-24)
+
+### Unknown
+
+* Merge branch 'main' of https://github.com/evhart/factflip ([`ced7479`](https://github.com/evhart/factflip/commit/ced7479025ba9dd6e52b45c28020bbc25d49e7e1))
+
+
 ## v0.1.0 (2024-10-24)
 
 ### Bug Fixes
+
+* fix: workflow update. ([`28525cc`](https://github.com/evhart/factflip/commit/28525cca5703b81df233262da48ccfd8fe243f4e))
 
 * fix: add embeddings data. ([`c3d323f`](https://github.com/evhart/factflip/commit/c3d323f381dae3d2e7ed65b5f20773e8203f4b69))
 
