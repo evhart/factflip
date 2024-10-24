@@ -18,6 +18,13 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           pypi-token: ${{ secrets.PYPI_TOKEN }}
           python-version: 3.12
+    outputs:
+      released: ${{ steps.create-release.outputs.released }}
+  embeddings_db:
+    runs-on: ubuntu-latest
+    permissions: write-all
+    needs: release
+    steps:
       - name: Add Embeddings to Release
         uses: JasonEtco/upload-to-release@master
         id: add-embeddings
@@ -25,6 +32,3 @@ jobs:
           args: data/factflip_embeddings.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    outputs:
-      released: ${{ steps.create-release.outputs.released }}
-      embeddings_url: ${{ steps.add-embeddings.outputs.browser_download_url }}
