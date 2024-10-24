@@ -1,6 +1,13 @@
 # CHANGELOG
 
 
+## v0.1.3 (2024-10-24)
+
+### Bug Fixes
+
+* fix: push embedding workflow. ([`a9a1750`](https://github.com/evhart/factflip/commit/a9a175026c5c26e7ef56723c36fc8441e114f4f4))
+
+
 ## v0.1.2 (2024-10-24)
 
 ### Bug Fixes
