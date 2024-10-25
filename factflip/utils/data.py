@@ -2,6 +2,7 @@ import logging
 import os
 import urllib
 import zipfile
+from io import BytesIO
 from pathlib import Path
 from typing import List
 
@@ -9,7 +10,8 @@ import requests
 from rdflib import Graph
 from rich.progress import track
 
-from factflip import DEFAULT_TEMPLATES_PATH
+import factflip
+from factflip import APP_REPOSITORY, DEFAULT_EMBEDDINGS_PATH, DEFAULT_TEMPLATES_PATH
 
 
 def load_rdf(rdf: Path, format="ttl") -> Graph:
@@ -75,3 +77,29 @@ def download_imgflip_templates_images(
             response = requests.get(url, stream=True, headers=headers)
             with open(imgf, "bw") as file:
                 file.write(response.content)
+
+
+def download_factflip_embeddings(
+    repository_url: str = APP_REPOSITORY, embeddings_version: str = factflip.version
+) -> zipfile.ZipFile:
+    embedding_asset_url = urllib.parse.urljoin(
+        f"{repository_url}/", f"releases/download/v{embeddings_version}/factflip_embeddings.zip"
+    )
+    request = requests.get(embedding_asset_url, stream=True)
+    return zipfile.ZipFile(BytesIO(request.content))
+
+
+def zip_factflip_embeddings(
+    embeddings_db: Path = DEFAULT_EMBEDDINGS_PATH, output: Path = "./data/factflip_embeddings.zip"
+):
+    zipf = zipfile.ZipFile(output, "w", zipfile.ZIP_DEFLATED)
+    rootdir = os.path.basename(embeddings_db)
+
+    for dirpath, _, filenames in os.walk(embeddings_db):
+        for filename in filenames:
+            if filename not in [".DS_Store", "__MACOSX"]:
+                filepath = os.path.join(dirpath, filename)
+                parentpath = os.path.relpath(filepath, embeddings_db)
+                arcname = os.path.join(rootdir, parentpath)
+                zipf.write(filepath, arcname)
+    zipf.close()

@@ -267,11 +267,15 @@ def build_embeddings_database(
         metadatas=merged_claims_df[
             [
                 "kym_template",
+                "kym_template_usage",
+                "kym_template_usage_concept",
                 "imgflip_template_id",
                 "imgflip_template",
+                "imgflip_template_image_description",
                 "imgflip_instance",
                 "imgflip_instance_text",
                 "imgflip_instance_claim",
+                "imgflip_instance_correction_claim",
             ]
         ].to_dict("records"),
         ids=merged_claims_df.imgflip_instance.to_list(),

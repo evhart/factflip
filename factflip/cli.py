@@ -1,5 +1,7 @@
 import os
+import shutil
 from pathlib import Path
+from typing import Optional
 
 import chromadb
 import pandas as pd
@@ -9,6 +11,7 @@ from rich.console import Console
 from rich.pretty import pprint
 from typing_extensions import Annotated
 
+import factflip
 from factflip import DEFAULT_EMBEDDINGS_PATH, DEFAULT_ROOT_PATH
 from factflip.generators import FactFlipMemeGenerator
 from factflip.llms import OllamaLlm
@@ -19,7 +22,12 @@ from factflip.utils.build import (
     merge_claims_data,
     query_imkg_memes,
 )
-from factflip.utils.data import download_and_parse_imkg, download_imgflip_templates_images, load_rdf
+from factflip.utils.data import (
+    download_and_parse_imkg,
+    download_factflip_embeddings,
+    download_imgflip_templates_images,
+    load_rdf,
+)
 from factflip.utils.memes import create_imgflip_meme
 from factflip.validators import FactFlipMemeValidator
 
@@ -27,8 +35,19 @@ load_dotenv()
 app = typer.Typer(no_args_is_help=True, add_completion=False)
 
 
+def _version_callback(value: bool):
+    if value:
+        print(factflip.version)
+        raise typer.Exit()
+
+
 @app.callback()
-def callback():
+def callback(
+    version: Annotated[
+        Optional[bool],
+        typer.Option("--version", "-v", help="Show the installed factflip version.", callback=_version_callback),
+    ] = None,
+):
     """🖼️  Factflip - A claim-based meme generator powered by IMKG and LLMs."""
 
 
@@ -69,6 +88,7 @@ def build(
     imkg_memes_f = os.path.join(imkg_dir, "imkg_memes.csv")
     imkg_memes_descriptions_f = os.path.join(imkg_dir, "imkg_memes_descriptions.csv")
     imkg_claims_f = os.path.join(imkg_dir, "imkg_claims.csv")
+    merged_claims_f = os.path.join(imkg_dir, "merged_imkg_claims.csv")
 
     console = Console()
     with console.status("Building embedding data (this will take a very long time)...") as status:
@@ -131,25 +151,45 @@ def build(
         # 5) Create embeddings database:
         status.update("Bulding embeddings database...")
         merged_claims_df = merge_claims_data(imkg_memes_df, imkg_memes_descriptions_df, imkg_claims_df)
+
+        merged_claims_df.to_csv(merged_claims_f, index=False)
+        status.update(f"Merged claims data saved: {merged_claims_f}")
+
         build_embeddings_database(merged_claims_df, embeddings_db, delete_collection=False)
         status.update("Embeddings database created.")
 
 
-# TODO Add code for downloading precomputed embeddings.
-# @app.command(help="Download IMKG data.")
-# def download(
-#     embeddings_db: Annotated[
-#         Path,
-#         typer.Option(
-#             ...,
-#             "--embeddings-db",
-#             "-db",
-#             envvar="FACTFLIP_EMBEDDINGS",
-#             help="The path of the FactFlip database that contains the embeddings.",
-#         ),
-#     ] = DEFAULT_EMBEDDINGS_DATA_PATH,
-# ):
-#     pass
+@app.command(help="Download precomputed Factflip embeddings.")
+def download(
+    embeddings_db: Annotated[
+        Path,
+        typer.Option(
+            ...,
+            "--embeddings-db",
+            "-db",
+            envvar="FACTFLIP_EMBEDDINGS",
+            help="The path of the FactFlip database that contains the embeddings.",
+        ),
+    ] = DEFAULT_EMBEDDINGS_PATH,
+    force_download: Annotated[
+        bool,
+        typer.Option("--force-download", "-f", help="Force download if the database is already present."),
+    ] = False,
+):
+    console = Console()
+    with console.status("Downloading embedding data...") as status:
+        if not os.path.isdir(embeddings_db) or force_download:
+            zipfile = download_factflip_embeddings(embeddings_version=factflip.version)
+
+            status.update("Extracting embedding data...")
+            if os.path.isdir(embeddings_db):
+                shutil.rmtree(embeddings_db)
+
+            Path(embeddings_db).mkdir(parents=True, exist_ok=True)
+            zipfile.extractall(embeddings_db)
+            status.update("Embedding data installed.")
+        else:
+            status.update("Embedding data already installed.")
 
 
 @app.command(help="Render a meme instance using the imgflip API.")

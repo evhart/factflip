@@ -12,6 +12,22 @@ include = [
     { path = "pyproject.toml", format = "sdist" },
     { path = "LICENSE", format = "sdist" },
 ]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Information Technology",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: Implementation :: PyPy",
+    "Topic :: Utilities",
+    "Topic :: Multimedia",
+]
 
 [tool.poetry.dependencies]
 python = "^3.12"
@@ -28,6 +44,7 @@ sparqlwrapper = "^2.0.0"
 imgflip-py = "^1.0"
 platformdirs = "^4.3.6"
 
+usingversion = "^0.1.2"
 [tool.poetry.group.dev.dependencies]
 python-semantic-release = "^9.12.0"
 ruff = "^0.7.0"

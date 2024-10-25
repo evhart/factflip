@@ -55,7 +55,7 @@ class FactFlipMemeGenerator(object):
             messages.append(
                 {
                     "role": "user",
-                    "content": f"Input claim review: {e['imgflip_instance_claim_correction']}",
+                    "content": f"Input claim review: {e['imgflip_instance_correction_claim']}",
                 }
             )
             messages.append(
