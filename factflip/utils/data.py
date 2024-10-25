@@ -93,13 +93,11 @@ def zip_factflip_embeddings(
     embeddings_db: Path = DEFAULT_EMBEDDINGS_PATH, output: Path = "./data/factflip_embeddings.zip"
 ):
     zipf = zipfile.ZipFile(output, "w", zipfile.ZIP_DEFLATED)
-    rootdir = os.path.basename(embeddings_db)
 
     for dirpath, _, filenames in os.walk(embeddings_db):
         for filename in filenames:
             if filename not in [".DS_Store", "__MACOSX"]:
                 filepath = os.path.join(dirpath, filename)
-                parentpath = os.path.relpath(filepath, embeddings_db)
-                arcname = os.path.join(rootdir, parentpath)
+                arcname = os.path.relpath(filepath, embeddings_db)
                 zipf.write(filepath, arcname)
     zipf.close()
