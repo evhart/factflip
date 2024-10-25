@@ -1,6 +1,13 @@
 # CHANGELOG
 
 
+## v0.2.1 (2024-10-25)
+
+### Bug Fixes
+
+* fix: Embeddings archive subdir. ([`7af67fb`](https://github.com/evhart/factflip/commit/7af67fbd6ff125746af67ff3ce5707a27c3b9d39))
+
+
 ## v0.2.0 (2024-10-25)
 
 ### Features
