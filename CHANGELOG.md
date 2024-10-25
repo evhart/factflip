@@ -1,6 +1,15 @@
 # CHANGELOG
 
 
+## v0.2.0 (2024-10-25)
+
+### Features
+
+* feat(embeddings): add support for downloading precomputed embedding database.
+
+Add support for downloading precomputed embeddings, add version number to command line and fix meme generation and embeddings (missing keys). ([`788934c`](https://github.com/evhart/factflip/commit/788934c8f1525f0a2390153f8a74c8ed54d16844))
+
+
 ## v0.1.7 (2024-10-24)
 
 ### Bug Fixes

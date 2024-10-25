@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "factflip"
-version = "0.1.7"
+version = "0.2.0"
 description = "An image macro meme generator designed for creating fact-checking memes based on misinforming claims and their corrections."
 authors = ["Grégoire Burel <423662+evhart@users.noreply.github.com>"]
 homepage = "https://github.com/evhart/factflip/"
