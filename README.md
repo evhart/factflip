@@ -18,8 +18,8 @@ Counsel requires an [Ollama](https://ollama.com/) installation for running the L
 
 ### 🖥️ Command Line Interface (CLI)
 
-Factflip has a simple CLI interface that be accessed using the ``` factflip ``` command.
-Before starting, run ```factflip download``` for downloading the precomputed embeddings database. Alternatively, you can build the database from scrathc using  the ```factflip build``` command. Building the database manually can take a few hours.
+Factflip has a simple CLI interface that be accessed using the ` ` ` factflip ` ` ` command.
+Before starting, run ` ` ` factflip download ` `  ` for downloading the precomputed embeddings database. Alternatively, you can build the database from scrathc using  the `  ` ` factflip build ` ` ` command. Building the database manually can take a few hours.
 
 ```
  Usage: factflip [OPTIONS] COMMAND [ARGS]...
@@ -40,7 +40,7 @@ Before starting, run ```factflip download``` for downloading the precomputed emb
 
 ## 🎓 Publication
 
-> Filipe Altoe, Gregoire Burel, Sergio Miguel Gonçalves Pinto, Harith Alani and H. Sofia Pinto. *"Towards AI-mediated Meme Generation for Misinformation Corrective Explanation"*. EMAI-XAI24, CAI 2024. IOS Press, 2024.
+> Altoe, F., Burel, G., Gonçalves Pinto, S. F., Alani H., and Pinto, S. (2024) *Towards [AI-mediated Meme Generation for Misinformation Corrective Explanation](https://ceur-ws.org/Vol-3803/paper5.pdf)*. In proceedings of the First Multimodal, Affective and Interactive eXplainable AI Workshop (MAI-XAI24 2024) co-located with 27th European Conference On Artificial Intelligence (ECAI 2024). Santiago de Compostela, Spain.
 
 ## 📐 Architecture
 
